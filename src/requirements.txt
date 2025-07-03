@@ -1,1 +1,4 @@
 tabula-py
+pandas
+#jpy
+#Install JAVA
