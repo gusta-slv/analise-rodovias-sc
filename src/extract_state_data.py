@@ -1,6 +1,6 @@
 import tabula
 import pandas as pd
-#Importar páginas do PDF a serem extraídos os dados
+#Importar páginas do PDF a serem extraídos os dados - Rodoviar Estaduais
 dfs = tabula.read_pdf(r"C:/Users/gusta/Git/projetos/rodovias_files/Relatorio_SRE2024_SC-1.pdf", pages=('20-28'), multiple_tables=False)
 sc_fed = dfs[0]
 #Renomeando colunas
@@ -17,3 +17,7 @@ sc_est.columns = ['Código do trecho', 'Início do trecho', 'Fim do trecho', 'In
 sc_est = sc_est[sc_est['Código do trecho'] != 'CÓDIGO DO']
 sc_est = sc_est[sc_est['Código do trecho'] != 'TRECHO']
 sc_est.reset_index(drop=True, inplace=True)
+#Incluindo dados do excel - Rodovias Federais
+df_fed = pd.read_excel("C:/Users/gusta/Git/projetos/rodovias_files/VMDa 2023.xlsx", sheet_name="SNV202401A")
+df_fed_sc = df_fed[df_fed['sg_uf'] == 'SC']
+print("finish")
