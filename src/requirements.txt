@@ -1,5 +1,7 @@
 tabula-py
 pandas
 openpyxl
+geopandas
+fiona
 #jpy
 #Install JAVA
