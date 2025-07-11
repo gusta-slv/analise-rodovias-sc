@@ -3,5 +3,6 @@ pandas
 openpyxl
 geopandas
 fiona
+lxml
 #jpy
 #Install JAVA
