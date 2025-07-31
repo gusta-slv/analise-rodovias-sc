@@ -1,6 +1,9 @@
 import geopandas as gpd
 import pandas as pd
 import matplotlib
+import utm
+from pyproj import Transformer
+
 matplotlib.use('TkAgg',force=True)
 from matplotlib import pyplot as plt
 #Defining the path to the shapefile folder with files
@@ -17,11 +20,17 @@ test = gdf.explode(ignore_index=True)
 a = test.get_coordinates(index_parts=True)
 #Adding column for the highway codename
 a["rodovia"] = ""
+#Adding column for WBS84 coordinate
+WBS84_x = []
+WBS84_y = []
 
 #Adding highway codename to the latitude/longitude dataframe
 len_df = len(gdf.index.unique())
 for i in range(len_df):
-    #print(i)
+    print(i)
     for j in range(len(a.loc[i])):
         a.loc[([i],[j]), "rodovia"] = gdf.iloc[i,0]
-print("")
+        WBS84_x.append(utm.to_latlon(a.at[(i,j),'x'], a.at[(i,j),'y'], 22, 'H')[0])
+        WBS84_y.append(utm.to_latlon(a.at[(i,j),'x'], a.at[(i,j),'y'], 22, 'H')[1])   
+a['WBS84 x'] = WBS84_x
+a['WBS84 y'] = WBS84_y
